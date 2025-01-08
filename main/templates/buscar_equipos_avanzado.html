@@ -1,0 +1,24 @@
+{% extends 'master.html' %}
+{% load static %}
+{% block titulo %}Buscar Equipos por Texto y Región{% endblock %}
+
+{% block contenido %}
+    <form method="get" class="d-flex justify-content-center mb-4">
+        <input type="text" name="descripcion" value="{{ request.GET.descripcion }}" class="form-control me-2" placeholder="Descripción (e.g., esports)">
+        <input type="text" name="region" value="{{ request.GET.region }}" class="form-control me-2" placeholder="Región (e.g., Europa)">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    {% if resultados %}
+        <ul class="list-group">
+            {% for resultado in resultados %}
+                <li class="list-group-item">
+                    <strong>{{ resultado.nombre }}</strong> 
+                    {% if resultado.descripcion %}- {{ resultado.descripcion }}{% endif %} <br>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-center text-muted">No se encontraron resultados.</p>
+    {% endif %}
+{% endblock %}

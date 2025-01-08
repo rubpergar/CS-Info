@@ -1,0 +1,59 @@
+{% extends 'master.html' %}
+{% load static %}
+{% block titulo %}Buscar por Nombre{% endblock %}
+
+{% block contenido %}
+    <form method="get" class="d-flex justify-content-center mb-4">
+        <input type="text" name="q" value="{{ query }}" class="form-control me-2" placeholder="Buscar...">
+        <select name="tipo" class="form-select me-2">
+            <option value="jugadores" {% if tipo == "jugadores" %}selected{% endif %}>Jugadores</option>
+            <option value="equipos" {% if tipo == "equipos" %}selected{% endif %}>Equipos</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    {% if resultados %}
+        <ul class="list-group">
+            {% for resultado in resultados %}
+                <li class="list-group-item">
+                    {% if tipo == "jugadores" %}
+                        <h5><strong><a>{{ resultado.nick }}</a></strong></h5>
+                        <p><strong>Nombre Real:</strong> {{ resultado.nombre_real }}</p>
+                        <p><strong>Nacionalidad:</strong> {{ resultado.nacionalidad }}</p>
+                        <p><strong>Equipo:</strong> 
+                            {% if resultado.equipo %}
+                                <a href="{% url 'detalle_equipo' resultado.equipo.idEquipo %}">{{ resultado.equipo.nombre }}</a>
+                            {% else %}
+                                Sin equipo
+                            {% endif %}
+                        </p>
+                        <p><strong>Ganancias:</strong> ${{ resultado.ganancias|floatformat:2 }}</p>
+                        <p><strong>Roles:</strong> 
+                            {% for rol in resultado.roles.all %}
+                                {{ rol.nombre }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                        <p><strong>Descripción:</strong> {{ resultado.descripcion }}</p>
+                    {% elif tipo == "equipos" %}
+                        <h5><strong><a>{{ resultado.equipo.nombre }}</a></strong></h5>
+                        <p><strong>Región:</strong> {{ resultado.equipo.region.nombre }}</p>
+                        <p><strong>Capitán:</strong> {{ resultado.equipo.capitan }}</p>
+                        <p><strong>Entrenador:</strong> {{ resultado.equipo.entrenador }}</p>
+                        <p><strong>Ganancias Totales:</strong> ${{ resultado.equipo.ganancias|floatformat:2 }}</p>
+                        <p><strong>Descripción:</strong> {{ resultado.equipo.descripcion }}</p>
+                        <p><strong>Jugadores:</strong></p>
+                        <ul>
+                            {% for jugador in resultado.jugadores %}
+                                <li><a href="{% url 'detalle_jugador' jugador.idJugador %}">{{ jugador.nick }}</a> ({{ jugador.nacionalidad }})</li>
+                            {% empty %}
+                                <li class="text-muted">Sin jugadores registrados.</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-center text-muted">No se encontraron resultados para {{ query }}.</p>
+    {% endif %}
+{% endblock %}

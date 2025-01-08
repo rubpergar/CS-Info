@@ -1,0 +1,39 @@
+/* index.css */
+
+.container {
+    max-width: 960px;
+}
+
+h1, h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+
+img {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+.btn-primary {
+    background-color: #28397F;
+    border-color: #0056b3;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #FBAC18;
+    transform: translateY(-3px);
+}
+
+p.lead {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #6c757d;
+}
+
+.text-muted {
+    color: #adb5bd !important;
+    font-size: 1rem;
+}

@@ -1,0 +1,90 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block titulo %}Información de la Base de Datos{% endblock %}
+
+{% block contenido %}
+<div class="container py-4">
+
+    <!-- Regiones -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h2 class="h5 mb-0">Regiones</h2>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                {% for region in regiones %}
+                    <li class="list-group-item">{{ region.nombre }}</li>
+                {% empty %}
+                    <li class="list-group-item text-muted">No hay regiones registradas.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Equipos -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-success text-white">
+            <h2 class="h5 mb-0">Equipos</h2>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                {% for equipo in equipos %}
+                    <li class="list-group-item">
+                        <strong>{{ equipo.nombre }}</strong> - {{ equipo.region.nombre }} <br>
+                        <p class="mb-1">{{ equipo.descripcion }}</p><br>
+                        <p class="mb-1"><strong>Entrenador:</strong> {{ equipo.entrenador }}</p>
+                        <p class="mb-1"><strong>Capitán:</strong> {{ equipo.capitan }}</p>
+                        <p class="mb-1"><strong>Ganancias:</strong> ${{ equipo.ganancias|floatformat:2 }}</p>
+                        <strong>Miembros:</strong>
+                        <ul class="ps-3">
+                            {% for jugador in equipo.jugador_set.all %}
+                                <li>
+                                    {% if jugador.nick %}{{ jugador.nick }}{% else %}Sin nick{% endif %} ({{ jugador.nacionalidad }})
+                                    {% if jugador.roles.exists %} -
+                                        {% for rol in jugador.roles.all %}
+                                            {{ rol.nombre }}{% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </li>
+                            {% empty %}
+                                <li class="text-muted">Sin jugadores registrados.</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item text-muted">No hay equipos registrados.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Jugadores -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-warning text-dark">
+            <h2 class="h5 mb-0">Jugadores</h2>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                {% for jugador in jugadores %}
+                    <li class="list-group-item">
+                        <strong>{{ jugador.nick }}</strong>
+                        <p class="mb-1">{{ jugador.descripcion }}</p> <br>
+                        <p class="mb-1"><strong>Nombre:</strong> {{ jugador.nombre_real }}</p>
+                        <p class="mb-1"><strong>Equipo:</strong> {{ jugador.equipo.nombre }}</p>
+                        <p class="mb-1"><strong>Nacionalidad:</strong> {{ jugador.nacionalidad }}</p>
+                        <p class="mb-1"><strong>Ganancias:</strong> ${{ jugador.ganancias }}</p>
+                        <p class="mb-1"><strong>Rol:</strong> 
+                            {% for rol in jugador.roles.all %}
+                                {{ rol.nombre }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item text-muted">No hay jugadores registrados.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

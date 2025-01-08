@@ -1,0 +1,29 @@
+{% extends 'master.html' %}
+{% block titulo %}Buscar Jugadores por Ganancias{% endblock %}
+
+{% block contenido %}
+    <form method="get" class="mb-4">
+        <div class="mb-3">
+            <label for="min_ganancias" class="form-label">Ganancias Mínimas:</label>
+            <input type="number" step="100" name="min_ganancias" id="min_ganancias" class="form-control" value="{{ min_ganancias }}">
+        </div>
+        <div class="mb-3">
+            <label for="max_ganancias" class="form-label">Ganancias Máximas:</label>
+            <input type="number" step="100" name="max_ganancias" id="max_ganancias" class="form-control" value="{{ max_ganancias }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    {% if resultados %}
+        <ul class="list-group">
+            {% for resultado in resultados %}
+                <li class="list-group-item">
+                    <strong>{{ resultado.nick }}:</strong> ${{ resultado.ganancias|floatformat:2 }}
+                    
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-center text-muted">No se encontraron jugadores en este rango de ganancias.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,82 @@
+{% load static %}
+<title>CS Info</title>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}?v=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+        }
+        .navbar .dropdown-menu {
+            background-color: #343a40;
+            border: none;
+        }
+        .navbar .dropdown-item {
+            color: white;
+        }
+        .navbar .dropdown-item:hover {
+            background-color: #495057;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Inicio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="buscarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Base de Datos
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="buscarDropdown">
+                            <li><a class="dropdown-item" href="/populate">Poblar</a></li>
+                            <li><a class="dropdown-item" href="/listar">Listar</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="buscarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Buscar
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="buscarDropdown">
+                            <li><a class="dropdown-item" href="/buscar">Búsqueda por nombre</a></li>
+                            <li><a class="dropdown-item" href="/buscar/equipos/avanzado">Búsqueda por texto</a></li>
+                            <li><a class="dropdown-item" href="/buscar/jugador/ganancias">Búsqueda por ganancias</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        <h1 class="text-center mb-4">{% block titulo %} {% endblock %}</h1>
+        {% block contenido %} {% endblock %}
+    </main>
+
+    <footer class="py-4 text-center">
+        <p>&copy; Proyecto Django por Rubén Pérez Garrido - AII 2024/2025</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

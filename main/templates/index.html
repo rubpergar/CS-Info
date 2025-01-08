@@ -1,0 +1,35 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block contenido %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6 text-center">
+                <!-- Logo -->
+                <img src="{% static 'images/logo_cs2.webp' %}" alt="CS2 Logo" class="img-fluid mb-4" style="max-width: 150px;">
+
+                <!-- Título -->
+                <h1 style="color: #28397F">CS Info</h1>
+                <h2 class="text-secondary mb-4">Información del mundo competitivo de CS2</h2>
+
+                <!-- Descripción -->
+                <p class="lead text-muted">
+                    Explora datos de jugadores y equipos del competitivo de Counter-Strike 2.
+                </p>
+
+                <!-- Botón -->
+                <div class="mt-4">
+                    <a href="https://liquipedia.net/counterstrike/Main_Page" class="btn btn-primary btn-lg px-4 shadow-sm">Fuente original</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Texto extra -->
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <p class="text-muted small">Proyecto desarrollado con <strong>Django</strong>, <strong>BeautifulSoup</strong> y <strong>Whoosh</strong>.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

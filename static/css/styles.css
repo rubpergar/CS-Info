@@ -1,0 +1,54 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4 {
+    color: #343a40;
+}
+
+.nav-tabs .nav-link {
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 0;
+    border: 1px solid #dee2e6;
+    color: #495057;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.card {
+    border-radius: 0.5rem;
+}
+
+.card-header {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    background-color: #ffffff;
+    padding: 1rem 1.5rem;
+}
+
+.list-group-item {
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+}
+
+.tab-content {
+    padding-top: 1rem;
+}
+
+footer {
+    margin-top: auto;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 1rem 0;
+    background-color: #343a40;
+    color: #fff;
+}

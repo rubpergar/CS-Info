@@ -1,0 +1,22 @@
+{% extends 'master.html' %}
+{% block titulo %}Detalle de {{ jugador.nick }}{% endblock %}
+
+{% block contenido %}
+    <h1>{{ jugador.nick }}</h1>
+    <p><strong>Nombre Real:</strong> {{ jugador.nombre_real }}</p>
+    <p><strong>Nacionalidad:</strong> {{ jugador.nacionalidad }}</p>
+    <p><strong>Equipo:</strong> 
+        {% if jugador.equipo %}
+            <a href="{% url 'detalle_equipo' jugador.equipo.idEquipo %}">{{ jugador.equipo.nombre }}</a>
+        {% else %}
+            Sin equipo
+        {% endif %}
+    </p>
+    <p><strong>Ganancias:</strong> ${{ jugador.ganancias|floatformat:2 }}</p>
+    <p><strong>Roles:</strong> 
+        {% for rol in jugador.roles.all %}
+            {{ rol.nombre }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    <p><strong>Descripción:</strong> {{ jugador.descripcion }}</p>
+{% endblock %}

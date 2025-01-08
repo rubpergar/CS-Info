@@ -1,0 +1,29 @@
+{% extends 'master.html' %}
+
+{% block titulo %}Detalle de {{ equipo.nombre }}{% endblock %}
+
+{% block contenido %}
+
+    <h1>{{ equipo.nombre }}</h1>
+    <p><strong>Región:</strong> {{ equipo.region.nombre }}</p>
+    <p><strong>Capitán:</strong> {{ equipo.capitan }}</p>
+    <p><strong>Entrenador:</strong> {{ equipo.entrenador }}</p>
+    <p><strong>Ganancias Totales:</strong> ${{ equipo.ganancias|floatformat:2 }}</p>
+    <p><strong>Descripción:</strong> {{ equipo.descripcion }}</p>
+    <h3>Jugadores</h3>
+    <ul>
+        {% for jugador in jugadores %}
+            <li><a href="{% url 'detalle_jugador' jugador.idJugador %}">{{ jugador.nick }}</a> 
+                ({{ jugador.nacionalidad }})
+                {% if jugador.roles.exists %} -
+                    {% for rol in jugador.roles.all %}
+                        {{ rol.nombre }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </li>
+
+        {% empty %}
+            <li class="text-muted">Sin jugadores registrados.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
